@@ -1,0 +1,12 @@
+upstream demoapp {
+  server 127.0.0.1:9292 fail_timeout=0;
+}
+
+server {
+  listen 80;
+  server_name demoapp;
+
+  location / {
+    proxy_pass http://demoapp;
+  }
+}
