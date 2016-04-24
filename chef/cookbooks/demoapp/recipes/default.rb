@@ -59,7 +59,8 @@ deploy_revision node[:demoapp][:home] do
     # This does not handle updates to the application
     execute 'Start puma' do
       command 'bundle exec puma -d --pidfile /opt/demoapp/shared/puma.pid'
-      environment "HOME" => node[:demoapp][:home]
+      environment "HOME" => node[:demoapp][:home],
+                  "PWD" => node[:demoapp][:home]
       cwd release_path
       user node[:demoapp][:user]
     end
