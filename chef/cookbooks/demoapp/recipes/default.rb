@@ -12,9 +12,12 @@ package 'bundler'
 package 'nginx'
 
 # Don't actually do this, use the nginx cookbook.
-cookbook_file '/etc/nginx/sites-enabled/demoapp'
+cookbook_file '/etc/nginx/sites-enabled/demoapp' do
+  notifies :restart, 'service[nginx]'
+end
 
 file '/etc/nginx/sites-enabled/default' do
+  notifies :restart, 'service[nginx]'
   action :delete
 end
 
@@ -56,9 +59,9 @@ deploy_revision node[:demoapp][:home] do
     # This does not handle updates to the application
     execute 'Start puma' do
       command 'bundle exec puma -d --pidfile /opt/demoapp/shared/puma.pid'
+      environment "HOME" => node[:demoapp][:home]
       cwd release_path
       user node[:demoapp][:user]
     end
   end
-  notifies :restart, 'service[nginx]'
 end
