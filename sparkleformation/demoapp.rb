@@ -19,7 +19,7 @@ SparkleFormation.new('demoapp') do
         listeners [ { 'LoadBalancerPort' => 80,
                       'InstancePort' => 80,
                       'Protocol' => 'HTTP' 
-                    } ]
+                  } ]
 
         health_check({ 'Target' => 'TCP:80', 'Interval' => 30, 'UnhealthyThreshold' => 2,
                        'HealthyThreshold' => 2, 'Timeout' => 10 })
@@ -31,22 +31,22 @@ SparkleFormation.new('demoapp') do
         path '/'
         policies([ { 'PolicyName' => 'root',
                      'PolicyDocument' => {
-                        'Version' => '2012-10-17',
-                        'Statement' => [ {
+                       'Version' => '2012-10-17',
+                       'Statement' => [ {
                           'Effect' => 'Allow',
                           'Action' => '*',
                           'Resource' => '*'
-                        }]
-                      }
-                   }])
+                       } ]
+                     }
+                  }])
         assume_role_policy_document({ 'Version' => '2012-10-17', 
                                       'Statement' => [ { 'Effect' => 'Allow', 
                                                          'Principal' => { 
-                                                           'Service' => ['ec2.amazonaws.com']
-                                                          }, 
-                                                          'Action' => ['sts:AssumeRole'] 
-                                                       }
-                                                     ]})
+                                        'Service' => ['ec2.amazonaws.com']
+                                      }, 
+                                      'Action' => ['sts:AssumeRole'] 
+                                    }
+                                    ]})
       end
     end
 
