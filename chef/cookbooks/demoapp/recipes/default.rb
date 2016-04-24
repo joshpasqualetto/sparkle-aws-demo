@@ -12,7 +12,11 @@ package 'bundler'
 package 'nginx'
 
 # Don't actually do this, use the nginx cookbook.
-cookbook_file "/etc/nginx/sites-enabled/default"
+cookbook_file '/etc/nginx/sites-enabled/demoapp'
+
+file '/etc/nginx/sites-enabled/default' do
+  action :delete
+end
 
 service 'nginx' do
   supports :status => true, :restart => true, :reload => true
