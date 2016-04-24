@@ -1,8 +1,14 @@
 # sparkle-aws-demo
 
-## Assumptions
-* Ruby 2.1.x is installed
-* You have credentials configured, See credentials & config below
+## Using this code
+* Install Ruby 2.1
+* `bundle install`
+* Configure your credentials, see [Credentials / Config](#credentials--config)
+* `sfn create demoapp --file demoapp --defaults`
+* Should create a working cloudformation stack
+
+## Destroy
+* `sfn destroy demoapp`
 
 ## Credentials / Config
 
