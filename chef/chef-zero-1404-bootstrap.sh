@@ -15,8 +15,6 @@ cat << 'EOP'
 cookbook_path [
 "/root/sparkle-aws-demo/chef/cookbooks"
 ]
-environment "development"
-environment_path "/root/sparkle-aws-demo/chef/environments"
 log_level :info
 log_location STDOUT
 EOP
