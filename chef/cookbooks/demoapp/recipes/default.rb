@@ -9,6 +9,15 @@
 
 package 'ruby1.9.3'
 package 'bundler'
+package 'nginx'
+
+# Don't actually do this, use the nginx cookbook.
+cookbook_file "/etc/nginx/sites-enabled/default"
+
+service 'nginx' do
+  supports :status => true, :restart => true, :reload => true
+  action [ :enable, :start ]
+end
 
 group node[:demoapp][:user]
 
@@ -32,12 +41,20 @@ deploy_revision node[:demoapp][:home] do
 
   before_migrate do
     execute 'Run Bundler' do
-      command 'bundle install'
+      command 'bundle install --path=vendor/bundle'
       cwd release_path
       user node[:demoapp][:user]
     end
   end
 
   restart do
+    # You should use a real process supervisor here, runit, etc.
+    # This does not handle updates to the application
+    execute 'Start puma' do
+      command 'bundle exec puma -d --pidfile /opt/demoapp/shared/puma.pid'
+      cwd release_path
+      user node[:demoapp][:user]
+    end
   end
+  notifies :restart, 'service[nginx]'
 end
