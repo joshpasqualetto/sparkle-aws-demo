@@ -25,6 +25,7 @@ SparkleFormation.new('demoapp') do
                        'HealthyThreshold' => 2, 'Timeout' => 10 })
       end
     end
+
     demoapp_iam do
       type 'AWS::IAM::Role'
       properties do
