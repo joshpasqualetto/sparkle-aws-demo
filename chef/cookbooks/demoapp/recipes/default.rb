@@ -48,13 +48,5 @@ deploy_revision node[:demoapp][:home] do
   before_migrate do
   end
 
-  restart do
-    # You should use a real process supervisor here, runit, etc.
-    # This does not handle updates to the application
-    execute 'Start hhvm' do
-      command 'hhvm -m server -p 8080 &'
-      cwd release_path
-      user node[:demoapp][:user]
-    end
-  end
+  notifies :restart, 'service[hhvm]'
 end
