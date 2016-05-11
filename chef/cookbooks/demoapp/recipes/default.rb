@@ -2,9 +2,9 @@
 # Cookbook Name:: demoapp
 # Recipe:: default
 #
-# Copyright 2016, YOUR_COMPANY_NAME
+# Copyright 2016, Demo Inc
 #
-# All rights reserved - Do Not Redistribute
+# Completely Free
 #
 
 # This should be refactored into a base cookbook
@@ -13,44 +13,16 @@ include_recipe 'apt::unattended-upgrades'
 include_recipe 'os-hardening'
 include_recipe 'users::sysadmins'
 
-include_recipe 'hhvm'
+package 'git'
 
-service 'hhvm' do
-  supports :status => true, :restart => true, :reload => true
-  action [ :enable, :start ]
-end
-
-cookbook_file '/etc/default/hhvm' do
-  notifies :restart, 'service[hhvm]'
-end
-
-cookbook_file '/etc/hhvm/server.ini' do
-  notifies :restart, 'service[hhvm]'
-end
-
-cookbook_file '/etc/hhvm/php.ini' do
-  notifies :restart, 'service[hhvm]'
-end
-
-include_recipe 'nginx'
+include_recipe 'demoapp::hhvm'
+include_recipe 'demoapp::nginx'
 
 mysql_service 'demoapp' do
   port '3306'
   version '5.6'
   initial_root_password 'changeit'
   action [:create, :start]
-end
-
-package 'git'
-
-# Don't actually do this, use the nginx cookbook.
-cookbook_file '/etc/nginx/sites-enabled/demoapp' do
-  notifies :restart, 'service[nginx]'
-end
-
-file '/etc/nginx/sites-enabled/default' do
-  notifies :restart, 'service[nginx]'
-  action :delete
 end
 
 group node[:demoapp][:user]
