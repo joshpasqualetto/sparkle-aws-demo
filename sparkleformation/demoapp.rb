@@ -116,10 +116,16 @@ SparkleFormation.new('demoapp') do
         availability_zones available_azs 
         launch_configuration_name ref!(:demoapp_lc)
         load_balancer_names [ ref!(:demoapp_elb) ]
-        min_size 2
+        min_size 1
         max_size 5
         tags [ { 'Key' => 'Name', 'Value' => 'demoapp', 'PropagateAtLaunch' => 'true' }]
       end
     end
+  end
+  outputs do
+    hello_my_darling lb_hostname do
+       value attr!(demoapp_elb, 'DNSName')
+    end
+    puts "hello: #{hello_my_darling.inspect}"
   end
 end

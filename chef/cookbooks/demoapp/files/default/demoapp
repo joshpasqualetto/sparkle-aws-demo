@@ -1,7 +1,7 @@
 server {
   listen 80;
   server_name demoapp;
-  root /opt/demoapp/
+  root /opt/demoapp/;
 
   location / {
   }
