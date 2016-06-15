@@ -2,28 +2,27 @@
 # Cookbook Name:: demoapp
 # Recipe:: default
 #
-# Copyright 2016, YOUR_COMPANY_NAME
+# Copyright 2016, Demo Inc
 #
-# All rights reserved - Do Not Redistribute
+# Completely Free
 #
 
-package 'ruby1.9.3'
-package 'bundler'
-package 'nginx'
+# This should be refactored into a base cookbook
+include_recipe 'apt'
+include_recipe 'apt::unattended-upgrades'
+include_recipe 'os-hardening'
+include_recipe 'users::sysadmins'
 
-# Don't actually do this, use the nginx cookbook.
-cookbook_file '/etc/nginx/sites-enabled/demoapp' do
-  notifies :restart, 'service[nginx]'
-end
+package 'git'
 
-file '/etc/nginx/sites-enabled/default' do
-  notifies :restart, 'service[nginx]'
-  action :delete
-end
+include_recipe 'demoapp::hhvm'
+include_recipe 'demoapp::nginx'
 
-service 'nginx' do
-  supports :status => true, :restart => true, :reload => true
-  action [ :enable, :start ]
+mysql_service 'demoapp' do
+  port '3306'
+  version '5.6'
+  initial_root_password 'changeit'
+  action [:create, :start]
 end
 
 group node[:demoapp][:user]
@@ -47,22 +46,7 @@ deploy_revision node[:demoapp][:home] do
   migrate false
 
   before_migrate do
-    execute 'Run Bundler' do
-      command 'bundle install --path=vendor/bundle'
-      cwd release_path
-      user node[:demoapp][:user]
-    end
   end
 
-  restart do
-    # You should use a real process supervisor here, runit, etc.
-    # This does not handle updates to the application
-    execute 'Start puma' do
-      command 'bundle exec puma -d --pidfile /opt/demoapp/shared/puma.pid'
-      environment "HOME" => node[:demoapp][:home],
-                  "PWD" => node[:demoapp][:home]
-      cwd release_path
-      user node[:demoapp][:user]
-    end
-  end
+  notifies :restart, 'service[hhvm]'
 end

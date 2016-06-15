@@ -9,11 +9,13 @@ mkdir -p /etc/chef
 cd /root/
 git clone https://github.com/sniperd/sparkle-aws-demo 
 cd /root/sparkle-aws-demo
+git checkout wheniwork
 
 (
 cat << 'EOP'
 cookbook_path [
-"/root/sparkle-aws-demo/chef/cookbooks"
+"/root/sparkle-aws-demo/chef/cookbooks",
+"/root/sparkle-aws-demo/berks-cookbooks"
 ]
 log_level :info
 log_location STDOUT
@@ -22,5 +24,11 @@ EOP
 
 export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 export HOME=/root
+export RUBYOPTS="-E utf-8"
+export LANG=C.UTF-8
+
+
+/opt/chef/embedded/bin/gem install berkshelf --no-rdoc --no-ri
+/opt/chef/embedded/bin/berks vendor
 
 chef-client -z -c solo.rb -r 'recipe[demoapp]'
