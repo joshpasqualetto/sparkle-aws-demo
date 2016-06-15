@@ -38,7 +38,7 @@ You need to create the following manually:
 ## Security
 * Does not use SSL
 * Port 22 open to everyone (On AWS)
-* No automatic OS updates
+* Does run automatic OS updates (unattended-upgrades)
 
 ## Provides (AWS)
 * Cloudformation stack
