@@ -2,7 +2,7 @@
 
 ## Using this code (On AWS)
 * Clone this repo
-* Install Ruby 2.1
+* Install Ruby 2.1.x
 * `cd sparkle-aws-demo`
 * `bundle install`
 * Configure your credentials, see [Credentials / Config](#credentials--config)
@@ -28,7 +28,7 @@ You need to set the following environment variables with the respective keys for
 * AWS_REGION # This needs to be us-east-1, otherwise you need to change the az's in sparkleformation/demoapp.rb
 
 You need to create the following manually:
-* The keypair 'demoapp' must exist in AWS
+* The keypair 'demoapp' must exist in AWS, if you care about SSH'ing into it.
 
 ## Destroy
 * `sfn destroy demoapp`
@@ -38,6 +38,7 @@ You need to create the following manually:
 ## Security
 * Does not use SSL
 * Port 22 open to everyone (On AWS)
+* No automatic OS updates
 
 ## Provides (AWS)
 * Cloudformation stack
@@ -46,4 +47,4 @@ You need to create the following manually:
 * An AWS Security group allowing ssh & access from the ELB
 * An AWS Launch Configuration
 * An AWS Auto Scaling Group that brings up a minimum of 2 instances with all the above attached.
-* A chef-zero deployment setup that deploys the bcus demo app proxied by nginx
+* A chef-zero deployment setup that deploys the a demo webapp

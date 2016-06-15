@@ -7,3 +7,10 @@ gem 'kitchen-vagrant'
 gem 'foodcritic'
 gem 'rubocop'
 gem 'berkshelf'
+gem 'serverspec'
+
+group :development do
+  gem 'guard'
+  gem 'guard-rubocop'
+  gem 'guard-foodcritic'
+end

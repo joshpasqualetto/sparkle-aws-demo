@@ -1,2 +1,0 @@
-RUN_AS_USER="demoapp"
-ADDITIONAL_ARGS="--php"

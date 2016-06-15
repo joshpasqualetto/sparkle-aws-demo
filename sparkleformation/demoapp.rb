@@ -11,6 +11,7 @@ SparkleFormation.new('demoapp') do
     type 'String'
   end
 
+  # Probably should do VPC...
   resources do
     demoapp_elb do
       type 'AWS::ElasticLoadBalancing::LoadBalancer'
