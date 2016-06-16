@@ -22,18 +22,35 @@
 
 ## Credentials / Config
 
+You need to create the following manually:
+* The keypair 'demoapp' must exist in AWS, if you care about SSH'ing into it or the tests running
+
 You need to set the following environment variables with the respective keys for AWS, if you want to use another cloud, look at .sfn in this repo:
 * AWS_ACCESS_KEY_ID
 * AWS_SECRET_ACCESS_KEY
 * AWS_REGION # This needs to be us-east-1, otherwise you need to change the az's in sparkleformation/demoapp.rb
-
-You need to create the following manually:
-* The keypair 'demoapp' must exist in AWS, if you care about SSH'ing into it.
+* DEMOAPP_KEY_PATH # Needs to be the path to the demoapp private key
 
 ## Destroy
 * `sfn destroy demoapp`
 * OR
 * `kitchen destroy demoapp`
+
+## Tests
+
+### ServerSpec
+The provided sparkleformation template is infused with some ServerSpec magic to run ServerSpec tests against created resources, This happens automatically on creation or update of a resource.
+But you can execute them manually with this command:
+
+`bundle exec sfn serverspec demoapp -f demoapp`
+
+### Developmental tests (Rubocop, Foodcritic, Test kitchen)
+The provided tests useful during development are rubocop, food critic and test kitchen. If you would like to use test kitchen please see [Using this code (Locally)](#Using-this-code-(Locally))
+rubocop provides ruby lint checking and foodcritic applies best practice tests against the single cookbook we have.
+
+`rubocop` will run rubocops in the repo
+`foodcritic` will run your foodcritic tests
+`rake test` will run rubocop, foodcritic AND serverspec tests, however you need to ensure demoapp stack is up and running for it to pass.
 
 ## Security
 * Does not use SSL

@@ -3,6 +3,14 @@
 # options, please see:
 # http://www.sparkleformation.io/docs/sfn/configuration.html
 Configuration.new do
+  callbacks do
+    default ['serverspec_validator']
+  end
+  sfn_serverspec do
+      global_spec_patterns [File.join(Dir.pwd, 'spec/default/*_spec.rb')]
+      ssh_user 'ubuntu'
+      ssh_key_paths ENV['DEMOAPP_KEY_PATH']
+  end
   #   Set style of stack nesting
   apply_nesting 'deep'
   #   Enable processing of SparkleFormation templates

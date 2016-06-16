@@ -1,9 +1,7 @@
-require 'spec_helper'
+require 'serverspec'
 
-describe package('nginx'), :if => os[:family] == 'ubuntu' do
-  it { should be_installed }
-end
-
-describe port(80) do
-  it { should be_listening }
+describe 'My base packages should be installed' do
+  describe package('git'), if: os[:family] == 'ubuntu' do
+    it { should be_installed }
+  end
 end

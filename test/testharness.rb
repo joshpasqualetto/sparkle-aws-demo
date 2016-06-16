@@ -1,2 +1,2 @@
-puts "Test suite completed"
+puts 'Test suite completed'
 exit 0

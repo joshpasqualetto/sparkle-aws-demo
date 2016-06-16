@@ -262,6 +262,9 @@ GEM
       miasma-rackspace (>= 0.1.0, < 0.3)
       net-ssh
       sparkle_formation (>= 3.0.3, < 4)
+    sfn-serverspec (1.0.0)
+      serverspec (~> 2.24)
+      sfn (>= 3.0, < 4.0)
     shellany (0.0.1)
     slop (3.6.0)
     solve (2.0.3)
@@ -308,10 +311,12 @@ DEPENDENCIES
   guard-foodcritic
   guard-rubocop
   kitchen-vagrant
+  pry
   rake
   rubocop
   serverspec
   sfn
+  sfn-serverspec
   test-kitchen
 
 BUNDLED WITH

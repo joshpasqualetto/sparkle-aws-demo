@@ -1,5 +1,5 @@
-source "https://supermarket.chef.io"
+source 'https://supermarket.chef.io'
 
-cookbook "apt"
-cookbook "demoapp", path: 'chef/cookbooks/demoapp'
-cookbook "nginx"
+cookbook 'apt'
+cookbook 'demoapp', path: 'chef/cookbooks/demoapp'
+cookbook 'nginx'
