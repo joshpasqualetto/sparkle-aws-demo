@@ -15,7 +15,6 @@ mkdir -p /etc/chef
 cd /root/
 git clone https://github.com/sniperd/sparkle-aws-demo 
 cd /root/sparkle-aws-demo
-git checkout stelligent
 
 (
 cat << 'EOP'
