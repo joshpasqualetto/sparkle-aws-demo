@@ -1,0 +1,8 @@
+Metrics/LineLength:
+  Max: 90
+Style/PercentLiteralDelimiters:
+  Exclude:
+    - 'Rakefile'
+Style/TrailingBlankLines:
+  Exclude:
+    - 'Rakefile'

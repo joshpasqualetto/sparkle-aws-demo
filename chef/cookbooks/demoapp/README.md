@@ -1,3 +1,3 @@
 demoapp Cookbook
 ================
-Installs NibbleBlog 
+Installs a demo page with 'Automation for the People'
