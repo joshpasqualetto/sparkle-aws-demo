@@ -67,5 +67,5 @@ rubocop provides ruby lint checking and foodcritic applies best practice tests a
 * An AWS IAM Role (w/ instance profile)
 * An AWS Security group allowing ssh & access from the ELB
 * An AWS Launch Configuration
-* An AWS Auto Scaling Group that brings up a minimum of 2 instances with all the above attached.
+* An AWS Auto Scaling Group that brings up a minimum of 1 instance (5 max) with all the above attached.
 * A chef-zero deployment setup that deploys the a demo webapp
