@@ -107,7 +107,7 @@ SparkleFormation.new('demoapp') do
         security_groups [ref!(:demoapp_sg)]
         iam_instance_profile ref!(:demoapp_iam_profile)
         instance_type ref!(:instance_type)
-        key_name 'demoapp'
+        key_name ENV['DEMOAPP_KEY_NAME']
         user_data base64!(File.read(bootstrap_template))
       end
     end

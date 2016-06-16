@@ -23,13 +23,14 @@
 ## Credentials / Config
 
 You need to create the following manually:
-* The keypair 'demoapp' must exist in AWS, if you care about SSH'ing into it or the tests running
+* You should probably create a test/throwaway keypair in AWS, then set the environment variable DEMOAPP_KEY_NAME to that. It's used in sparkleformation/demoapp.rb to set the key in the launch config. See below.
 
 You need to set the following environment variables with the respective keys for AWS, if you want to use another cloud, look at .sfn in this repo:
 * AWS_ACCESS_KEY_ID
 * AWS_SECRET_ACCESS_KEY
 * AWS_REGION # This needs to be us-east-1, otherwise you need to change the az's in sparkleformation/demoapp.rb
 * DEMOAPP_KEY_PATH # Needs to be the path to the demoapp private key
+* DEMOAPP_KEY_NAME # The name of your keypair in AWS
 
 ## Destroy
 * `sfn destroy demoapp`
