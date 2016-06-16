@@ -1,5 +1,7 @@
 # sparkle-aws-demo
 
+This is a demo that deploys a server into an ASG and behind an ELB that just display's: 'Automation for the People'. If your reviewing this code please use the AWS method of deploying this code to get a true "one command" experience as most of the point is to show off sparkleformation. The local code option is for development of the cookbook(s).
+
 ## Using this code (On AWS)
 * Clone this repo
 * Install Ruby 2.1.x
@@ -7,7 +9,7 @@
 * `bundle install`
 * Configure your credentials, see [Credentials / Config](#credentials--config)
 * `sfn create demoapp --file demoapp --defaults`
-* Should create a working cloudformation stack
+* curl the ELB given as output at the end of the command to confirm the page has 'Automation for the People'. Or trust the tests.
 
 ## Using this code (Locally)
 * Clone this repo
@@ -46,7 +48,7 @@ But you can execute them manually with this command:
 `bundle exec sfn serverspec demoapp -f demoapp`
 
 ### Developmental tests (Rubocop, Foodcritic, Test kitchen)
-The provided tests useful during development are rubocop, food critic and test kitchen. If you would like to use test kitchen please see [Using this code (Locally)](#Using-this-code-(Locally))
+The provided tests that are useful during development are rubocop, food critic and test kitchen. If you would like to use test kitchen please see [Using this code (Locally)](#using-this-code-locally)
 rubocop provides ruby lint checking and foodcritic applies best practice tests against the single cookbook we have.
 
 `bundle exec rubocop -D --format offenses --format progress --fail-level W` will run rubocops in the repo
