@@ -51,11 +51,13 @@ But you can execute them manually with this command:
 The provided tests that are useful during development are rubocop, food critic and test kitchen. If you would like to use test kitchen please see [Using this code (Locally)](#using-this-code-locally)
 rubocop provides ruby lint checking and foodcritic applies best practice tests against the single cookbook we have.
 
+`rake test` will run rubocop, foodcritic AND serverspec tests, however you need to ensure demoapp stack is up and running for it to pass.
+
+OR
+
 `bundle exec rubocop -D --format offenses --format progress --fail-level W` will run rubocops in the repo
 
 `bundle exec foodcritic chef/cookbooks` will run your foodcritic ests
-
-`rake test` will run rubocop, foodcritic AND serverspec tests, however you need to ensure demoapp stack is up and running for it to pass.
 
 `bundle exec guard` Runs tests while you work
 
